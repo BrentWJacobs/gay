@@ -52,3 +52,4 @@ tensorflow-hub
 libsixel-python
 black
 isort
+flake8
