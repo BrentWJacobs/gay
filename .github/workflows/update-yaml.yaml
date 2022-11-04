@@ -1,0 +1,34 @@
+--- 
+author: "Rick Meneely <rick@meneely.com>"
+branding: 
+  color: purple
+  icon: edit
+description: "Update YAML file values"
+inputs: 
+  infile: 
+    default: values.yaml
+    description: "The YAML file to be updated"
+    required: false
+  varlist: 
+    default: ""
+    description: "Comma separated list of var=value"
+    required: false
+name: "Update YAML"
+outputs: 
+  updated: 
+    description: "Set to true or false based on if the infile was modified"
+    value: "${{ steps.update-yaml.outputs.updated }}"
+runs: 
+  steps: 
+    - 
+      uses: actions/setup-python@v4
+      with: 
+        python-version: "3.9"
+    - 
+      run: "python ${{ github.action_path }}/update-yaml.py -i ${{ inputs.infile }} -V \"${{ inputs.varlist }}\" > ${{ github.action_path }}/.update-yaml.tmp"
+      shell: bash
+    - 
+      id: update-yaml
+      run: "updated=$((diff ${{ inputs.infile }} ${{ github.action_path }}/.update-yaml.tmp || true) | wc -l | sed -e 's/ //g') ; if [ $updated = 0 ]; then updated='false' ; else updated='true' ; fi ; echo \"::set-output name=updated::${updated}\" ; mv ${{ github.action_path }}/.update-yaml.tmp ${{ inputs.infile }}\n"
+      shell: bash
+  using: composite
