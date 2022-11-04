@@ -1,0 +1,21 @@
+--- 
+? "-—name"
+: "Run yamllint uses bewuethr/yamllint-action@v1.1.1"
+author: "Benjamin Wuethrich"
+branding: 
+  color: blue
+  icon: check-circle
+description: "Run YAML linter with given configuration file"
+inputs: 
+  config-file: 
+    description: "Configuration file for yamllint to use"
+    required: false
+name: "Run yamllint"
+runs: 
+  args: 
+    - "${{ inputs.config-file }}"
+  image: Dockerfile
+  using: docker
+uses: bewuethr/yamllint-action@v1.1.2
+with: 
+  config-file: .github/workflows/yamllintconfig
