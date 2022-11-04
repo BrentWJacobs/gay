@@ -50,3 +50,5 @@ requests
 tensorflow
 tensorflow-hub
 libsixel-python
+black
+isort
