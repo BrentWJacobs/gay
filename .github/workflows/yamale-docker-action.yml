@@ -1,5 +1,5 @@
-- name: Setup Python
-  uses: actions/setup-python@v4.3.0
+- name: python-yamale
+  uses: eXpire163/yamale-docker-action@v3.1
 
 on: [push]
 
@@ -28,9 +28,6 @@ jobs:
       - name: Get the output time
         run: echo "The time was ${{ steps.single.outputs.time }}"
 
-docker run -v $(pwd):/data docker.pkg.github.com/expire163/yamale-docker-action/yamale:latest /data/mapfiles/map_schema.yml /data/mapfiles/users.yml true
-
-# action.yml
 name: "python-yamale"
 description: "A schema and validator for YAML."
 branding:
@@ -40,10 +37,10 @@ inputs:
   schema-file:
     default: "schema.yml"
     description: "schema files used for validation"
-    required: false
+    required: true
   test-file:
     default: "action.yml"
-    required: false
+    required: true
     description: "yaml file that needs to be validated"
   strict:
     default: "strict"
@@ -60,5 +57,3 @@ runs:
     - ${{ inputs.schema-file }}
     - ${{ inputs.test-file }}
     - ${{ inputs.strict}}
-    
-    

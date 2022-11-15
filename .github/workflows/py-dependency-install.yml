@@ -1,0 +1,64 @@
+- name: Python Dependency Installation
+  uses: py-actions/py-dependency-install@v4.0.0
+
+- name: Python Build for Windows(PyInstaller)
+  uses: vednig/pyinstaller-action-windows@v0.1.5
+
+- name: Setup Python
+  uses: actions/setup-python@v4.3.0
+
+steps:
+  # this Action should follow steps to set up Python build environment
+  - name: Install Python dependencies
+    uses: py-actions/py-dependency-install@v4
+
+steps:
+  # this Action should follow steps to set up Python build environment
+  - name: Install Python dependencies
+    uses: py-actions/py-dependency-install@v4
+    with:
+      path: "AdamOswald/Huggingface-Space/requirements.txt"
+
+steps:
+  # this Action should follow steps to set up Python build environment
+  - name: Install Python dependencies
+    uses: py-actions/py-dependency-install@v4
+    with:
+      path: "AdamOswald1/WhoKnows/requirements.txt"
+
+steps:
+  # this Action should follow steps to set up Python build environment
+  - name: Install Python dependencies
+    uses: py-actions/py-dependency-install@v4
+    with:
+      update-pip: "true"
+      update-setuptools: "true"
+      update-wheel: "true"
+
+name: "Python Dependency Installation"
+description: "Install Python dependencies from requirements.txt file"
+inputs:
+  path: # id
+    description: "Path to requirements.txt file"
+    required: false
+    default: "requirements.txt"
+  update-pip: # id
+    description: "Boolean for pip upgrade prior to the dependency installation (default='true')"
+    required: true
+    default: "true" # options "true", "false"
+  update-setuptools:
+    description: "Boolean for setuptools install/upgrade prior to the dependency installation (default='true')"
+    required: true
+    default: "true" # options "true", "false"
+  update-wheel:
+    description: "Boolean for wheel install/upgrade prior to the dependency installation (default='true')"
+    required: true
+    default: "true" # options "true", "false"
+
+runs:
+  using: "node16"
+  main: "dist/index.js"
+
+branding:
+  icon: "terminal"
+  color: "blue"
